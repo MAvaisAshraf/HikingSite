@@ -82,12 +82,13 @@ export class AuthorizationService {
     }
 
     private updateUserDetails = async () => {
-        const detailJson = await firstValueFrom(this.httpClient.get(Urls.osmUser)) as OsmUserDetails;
+        // HM TODO: convert response from xml to json
+        const detailJson = await firstValueFrom(this.httpClient.get(Urls.user)) as any;
         const userInfo = {
-            displayName: detailJson.displayName,
-            id: detailJson.id,
-            changeSets: detailJson.changeSetCount,
-            imageUrl: detailJson.image
+            displayName: detailJson.user.display_name,
+            id: detailJson.user.id,
+            changeSets: detailJson.user.changesets.count,
+            imageUrl: detailJson.user.img.href,
         };
         this.store.dispatch(new SetUserInfoAction(userInfo));
         this.loggingService.info(`[Authorization] User ${userInfo.displayName} logged-in successfully`);
@@ -172,14 +173,6 @@ export class AuthorizationService {
     }
 
     private getBackgroundStringForOsmAddress(baseLayerAddress: string): string {
-        let background = "background=bing";
-        if (baseLayerAddress !== "") {
-            if (baseLayerAddress.startsWith("/")) {
-                baseLayerAddress = Urls.baseTilesAddress + baseLayerAddress;
-            }
-            const address = baseLayerAddress.replace("{s}", "s");
-            background = `background=custom:${encodeURIComponent(address)}`;
-        }
-        return background;
+        return "background=bing";
     }
 }

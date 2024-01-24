@@ -79,6 +79,7 @@ export class HashService {
     }
 
     public getHref(): string {
+        /*
         const inMemoryState = this.store.selectSnapshot((s: ApplicationState) => s.inMemoryState);
         if (inMemoryState.fileUrl != null) {
             const urlTree = this.router.createUrlTree([RouteStrings.URL, inMemoryState.fileUrl], {
@@ -91,6 +92,7 @@ export class HashService {
         if (inMemoryState.shareUrl != null) {
             return this.getFullUrlFromShareId(inMemoryState.shareUrl.id);
         }
+        */
         return this.getMapAddress();
     }
 
@@ -100,7 +102,7 @@ export class HashService {
             (location.zoom + 1).toFixed(HashService.ZOOM_PERSICION),
             location.latitude.toFixed(HashService.HIGH_PERSICION),
             location.longitude.toFixed(HashService.HIGH_PERSICION)]);
-        return Urls.baseAddress + urlTree.toString();
+        return window.location.origin + urlTree.toString();
     }
 
     public getFullUrlFromLatLng(latlng: LatLngAlt) {
@@ -112,13 +114,19 @@ export class HashService {
     }
 
     public getFullUrlFromPoiId(poiSourceAndId: PoiRouterData) {
+        throw new Error("Not implemented");
+        /*
         const urlTree = this.router.createUrlTree([RouteStrings.POI, poiSourceAndId.source, poiSourceAndId.id],
             { queryParams: { language: poiSourceAndId.language } });
         return Urls.baseAddress + urlTree.toString();
+        */
     }
 
     public getFullUrlFromShareId(id: string) {
+        throw new Error("Not implemented");
+        /*
         const urlTree = this.router.createUrlTree([RouteStrings.SHARE, id]);
         return Urls.baseAddress + urlTree.toString();
+        */
     }
 }

@@ -32,16 +32,16 @@ export class RoutingProvider {
     }
 
     public async getRoute(latlngStart: LatLngAlt, latlngEnd: LatLngAlt, routinType: RoutingType): Promise<LatLngAlt[]> {
-
-        if (routinType !== "None" && (!SpatialService.isInIsrael(latlngStart) || !SpatialService.isInIsrael(latlngEnd))) {
-            return this.getRouteOutsideIsrael(latlngStart, latlngEnd, routinType);
-        }
-        const address = Urls.routing + "?from=" + latlngStart.lat + "," + latlngStart.lng +
-            "&to=" + latlngEnd.lat + "," + latlngEnd.lng + "&type=" + routinType;
         try {
-            const geojson = await firstValueFrom(this.httpClient.get(address).pipe(timeout(4500)));
-            const data = geojson as GeoJSON.FeatureCollection<GeoJSON.LineString>;
-            return data.features[0].geometry.coordinates.map(c => SpatialService.toLatLng(c));
+            //if (routinType !== "None" && (!SpatialService.isInIsrael(latlngStart) || !SpatialService.isInIsrael(latlngEnd))) {
+            return this.getRouteOutsideIsrael(latlngStart, latlngEnd, routinType);
+            //}
+            //const address = Urls.routing + "?from=" + latlngStart.lat + "," + latlngStart.lng +
+            //"&to=" + latlngEnd.lat + "," + latlngEnd.lng + "&type=" + routinType;
+        
+            //const geojson = await firstValueFrom(this.httpClient.get(address).pipe(timeout(4500)));
+            //const data = geojson as GeoJSON.FeatureCollection<GeoJSON.LineString>;
+            //return data.features[0].geometry.coordinates.map(c => SpatialService.toLatLng(c));
         } catch (ex) {
             try {
                 return await this.getOffineRoute(latlngStart, latlngEnd, routinType);

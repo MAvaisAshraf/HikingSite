@@ -113,7 +113,7 @@ import { RouteEditDialogComponent } from "./components/dialogs/routes/route-edit
 import { TracesDialogComponent } from "./components/dialogs/traces-dialog.component";
 import { SharesDialogComponent } from "./components/dialogs/shares-dialog.component";
 import { LanguageDialogComponent } from "./components/dialogs/language-dialog.component";
-import { DownloadDialogComponent } from "./components/dialogs/download-dialog.component";
+//import { DownloadDialogComponent } from "./components/dialogs/download-dialog.component";
 import { ShareDialogComponent } from "./components/dialogs/share-dialog.component";
 import { TermsOfServiceDialogComponent } from "./components/dialogs/terms-of-service-dialog.component";
 import { ConfirmDialogComponent } from "./components/dialogs/confirm-dialog.component";
@@ -141,7 +141,7 @@ import { PrivatePoiOverlayComponent } from "./components/overlays/private-poi-ov
 import { ClusterOverlayComponent } from "./components/overlays/cluster-overlay.component";
 import { GpsLocationOverlayComponent } from "./components/overlays/gps-location-overlay.component";
 import { ClearableOverlayComponent } from "./components/overlays/clearable-overlay.component";
-import { MissingPartOverlayComponent } from "./components/overlays/missing-part-overlay.component";
+//import { MissingPartOverlayComponent } from "./components/overlays/missing-part-overlay.component";
 import { SearchComponent } from "./components/search.component";
 import { InfoSidebarComponent } from "./components/sidebar/info-sidebar.component";
 import { IhmLinkComponent } from "./components/ihm-link.component";
@@ -326,7 +326,7 @@ const initializeApplication = (injector: Injector) => async () => {
             ClusterOverlayComponent,
             GpsLocationOverlayComponent,
             ClearableOverlayComponent,
-            MissingPartOverlayComponent,
+            //MissingPartOverlayComponent,
             SearchComponent,
             InfoSidebarComponent,
             IhmLinkComponent,
@@ -356,7 +356,7 @@ const initializeApplication = (injector: Injector) => async () => {
             SharesDialogComponent,
             LanguageDialogComponent,
             IntroDialogComponent,
-            DownloadDialogComponent,
+            //DownloadDialogComponent,
             ShareDialogComponent,
             TermsOfServiceDialogComponent,
             SendReportDialogComponent,

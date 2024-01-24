@@ -30,6 +30,8 @@ export class OfflineFilesDownloadService {
     }
 
     public async initialize(): Promise<void> {
+        return;
+        /*
         const offlineState = this.store.selectSnapshot((s: ApplicationState) => s.offlineState);
         const userState = this.store.selectSnapshot((s: ApplicationState) => s.userState);
         if (offlineState.isOfflineAvailable === true &&
@@ -50,9 +52,8 @@ export class OfflineFilesDownloadService {
             } catch (ex) {
                 this.loggingService.error("[Offline Download] Failed to migrate: " + (ex as Error).message);
             }
-
         }
-
+        */
     }
 
     public async downloadOfflineMaps(showMessage = true): Promise<void> {
@@ -91,6 +92,8 @@ export class OfflineFilesDownloadService {
 
     private async downloadOfflineFilesProgressAction(reportProgress: (progressValue: number) => void, fileNames: Record<string, string>):
         Promise<void> {
+        throw new Error("Not implemented");
+        /*
         this.loggingService.info("[Offline Download] Starting downloading offline files, last update: " +
         this.store.selectSnapshot((s: ApplicationState) => s.offlineState).lastModifiedDate);
         this.sidebarService.hide();
@@ -129,9 +132,12 @@ export class OfflineFilesDownloadService {
                 this.store.dispatch(new ToggleOfflineAction(this.layersService.getSelectedBaseLayer().key, false));
             }
         }
+        */
     }
 
     private async getFilesToDownloadDictionary(): Promise<Record<string, string>> {
+        throw new Error("Not implemented");
+        /*
         const lastModified = this.store.selectSnapshot((s: ApplicationState) => s.offlineState).lastModifiedDate;
         const lastModifiedString = lastModified ? lastModified.toISOString() : null;
         const fileNames = await firstValueFrom(this.httpClient.get(Urls.offlineFiles, {
@@ -140,9 +146,12 @@ export class OfflineFilesDownloadService {
         this.loggingService.info(
             `[Offline Download] Got ${Object.keys(fileNames).length} files that needs to be downloaded ${lastModifiedString}`);
         return fileNames as Record<string, string>;
+        */
     }
 
     public async isExpired(): Promise<boolean> {
+        throw new Error("Not implemented");
+        /*
         try {
             await firstValueFrom(this.httpClient.get(Urls.offlineFiles, {
                 params: { lastModified: null }
@@ -152,6 +161,6 @@ export class OfflineFilesDownloadService {
             const typeAndMessage = this.loggingService.getErrorTypeAndMessage(ex);
             return typeAndMessage.type === "server" && typeAndMessage.statusCode === 403;
         }
-
+        */
     }
 }

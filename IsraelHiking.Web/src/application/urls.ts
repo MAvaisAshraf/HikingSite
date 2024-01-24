@@ -1,6 +1,7 @@
 ﻿import { environment } from "../environments/environment";
 
 export class Urls {
+    /*
     public static readonly baseAddress = environment.baseAddress;
     public static readonly baseTilesAddress = environment.baseTilesAddress;
     public static readonly apiBase = environment.baseApiAddress;
@@ -26,6 +27,17 @@ export class Urls {
     public static readonly poiUpdates = Urls.poi + "updates/";
     public static readonly poiSimple = Urls.poi + "simple/";
     public static readonly poisOfflineFile = Urls.baseAddress + "/PointsOfInterest/pois.zip";
+    */
+
+    public static readonly OSM_API = "https://api.openstreetmap.org/api/0.6/";
+    public static readonly user = Urls.OSM_API + "user/details.json";
+    public static readonly traces = Urls.OSM_API + "user/gpx_files.json";
+    public static readonly traceGPX = Urls.OSM_API + 'gpx/';
+    public static readonly translations = "translations/";
+    // HM TODO: this needs a server...?
+    public static readonly emptyAuthHtml = window.location.origin + "/empty-for-oauth.html";
+    public static readonly health = "https://www.google.com/";
+    public static readonly elevation = "https://valhalla1.openstreetmap.de/height";
 
     public static readonly facebook = "https://www.facebook.com/sharer/sharer.php?u=";
     public static readonly waze = "https://www.waze.com/ul?navigate=yes&zoom=17&ll=";

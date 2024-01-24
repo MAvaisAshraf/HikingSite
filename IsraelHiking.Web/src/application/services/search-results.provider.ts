@@ -33,6 +33,7 @@ export class SearchResultsProvider {
                 description: "",
             }];
         }
+        /*
         try {
             const language = isHebrew ? "he" : "en";
             const params = new HttpParams().set("language", language);
@@ -41,7 +42,10 @@ export class SearchResultsProvider {
             }).pipe(timeout(3000)));
             return response as SearchResultsPointOfInterest[];
         } catch {
+            */
             return await this.poiService.getSerchResults(searchWithoutBadCharacters);
+            /*
         }
+        */
     }
 }

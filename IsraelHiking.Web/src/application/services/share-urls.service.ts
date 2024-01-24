@@ -40,7 +40,7 @@ export class ShareUrlsService {
         if (this.store.selectSnapshot((s: ApplicationState) => s.userState).userInfo == null) {
             return;
         }
-        this.syncShareUrls();
+        //this.syncShareUrls();
     }
 
     public getShareUrlDisplayName(shareUrl: Immutable<ShareUrl>): string {
@@ -48,6 +48,8 @@ export class ShareUrlsService {
     }
 
     public getShareSocialLinks(shareUrl: Immutable<ShareUrl>): IShareUrlSocialLinks {
+        throw new Error("Not implemented");
+        /*
         if (shareUrl == null) {
             return {
                 ihm: "",
@@ -64,16 +66,22 @@ export class ShareUrlsService {
             whatsapp: this.whatsAppService.getUrl(this.getShareUrlDisplayName(shareUrl), escaped) as string,
             nakeb: `https://www.nakeb.co.il/add_new_hike?ihm_link=${shareUrl.id}`
         };
+        */
     }
 
     private async getShareFromServerAndCacheIt(shareUrlId: string, timeToWait = 60000): Promise<ShareUrl> {
+        throw new Error("Not implemented");
+        /*
         this.loggingService.info(`[Shares] Getting share by id ${shareUrlId}`);
         const shareUrl = await firstValueFrom(this.httpClient.get(Urls.urls + shareUrlId).pipe(timeout(timeToWait)));
         this.databaseService.storeShareUrl(shareUrl as ShareUrl);
         return shareUrl as ShareUrl;
+        */
     }
 
     public async getShareUrl(shareUrlId: string): Promise<ShareUrl> {
+        throw new Error("Not implemented");
+        /*
         let shareUrl = await this.databaseService.getShareUrlById(shareUrlId);
         if (shareUrl == null) {
             return await this.getShareFromServerAndCacheIt(shareUrlId);
@@ -92,9 +100,12 @@ export class ShareUrlsService {
             this.getShareFromServerAndCacheIt(shareUrlId); // don't wait for it...
             return shareUrl;
         }
+        */
     }
 
     public async syncShareUrls(): Promise<any> {
+        throw new Error("Not implemented");
+        /*
         if (this.syncing) {
             this.loggingService.info("[Shares] Already syncing...");
             return;
@@ -139,55 +150,78 @@ export class ShareUrlsService {
         } finally {
             this.syncing = false;
         }
+        */
     }
 
     public async createShareUrl(shareUrl: ShareUrl): Promise<ShareUrl> {
+        throw new Error("Not implemented");
+        /*
         this.loggingService.info(`[Shares] Creating share with title: ${shareUrl.title}`);
         const createdShareUrl = await firstValueFrom(this.httpClient.post(Urls.urls, shareUrl)) as ShareUrl;
         createdShareUrl.lastModifiedDate = new Date(createdShareUrl.lastModifiedDate);
         this.store.dispatch(new AddShareUrlAction(createdShareUrl));
         return createdShareUrl;
+        */
     }
 
     public async updateShareUrl(shareUrl: ShareUrl): Promise<ShareUrl> {
+        throw new Error("Not implemented");
+        /*
         this.loggingService.info(`[Shares] Updating share with id: ${shareUrl.id}`);
         const updatedShareUrl = await firstValueFrom(this.httpClient.put(Urls.urls + shareUrl.id, shareUrl)) as ShareUrl;
         updatedShareUrl.lastModifiedDate = new Date(updatedShareUrl.lastModifiedDate);
         this.store.dispatch(new UpdateShareUrlAction(updatedShareUrl));
         return updatedShareUrl;
+        */
     }
 
     public async deleteShareUrl(shareUrl: Immutable<ShareUrl>): Promise<void> {
+        throw new Error("Not implemented");
+        /*
         this.loggingService.info(`[Shares] Deleting share with id: ${shareUrl.id} ${shareUrl.title}`);
         await firstValueFrom(this.httpClient.delete(Urls.urls + shareUrl.id));
         this.store.dispatch(new RemoveShareUrlAction(shareUrl.id));
         await this.databaseService.deleteShareUrlById(shareUrl.id);
+        */
     }
 
     public getImageFromShareId(shareUrl: ShareUrl, width?: number, height?: number) {
+        throw new Error("Not implemented");
+        /*
         let address = Urls.images + shareUrl.id;
         if (width && height) {
             address += `?width=${width}&height=${height}`;
         }
         return address;
+        */
     }
 
     public async getImagePreview(dataContainer: DataContainer) {
+        throw new Error("Not implemented");
+        /*
         const image = await firstValueFrom(this.httpClient.post(Urls.images, dataContainer, { responseType: "blob" }));
         return window.URL.createObjectURL(image);
+        */
     }
 
     public setShareUrl(shareUrl: ShareUrl) {
-        this.store.dispatch(new SetShareUrlAction(shareUrl));
+        throw new Error("Not implemented");
+        //this.store.dispatch(new SetShareUrlAction(shareUrl));
     }
 
     public async setShareUrlById(shareId: string): Promise<ShareUrl> {
+        throw new Error("Not implemented");
+        /*
         const shareUrl = await this.getShareUrl(shareId);
         this.setShareUrl(shareUrl);
         return shareUrl;
+        */
     }
 
     public getSelectedShareUrl(): Immutable<ShareUrl> {
+        throw new Error("Not implemented");
+        /*
         return this.store.selectSnapshot((s: ApplicationState) => s.inMemoryState).shareUrl;
+        */
     }
 }

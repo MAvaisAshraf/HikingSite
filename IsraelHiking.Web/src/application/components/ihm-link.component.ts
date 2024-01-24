@@ -30,7 +30,7 @@ export class IhmLinkComponent extends BaseMapComponent {
         if (this.runningContextService.isIFrame) {
             return this.hashService.getHref();
         } else {
-            return Urls.baseAddress;
+            return window.location.origin;
         }
     }
 

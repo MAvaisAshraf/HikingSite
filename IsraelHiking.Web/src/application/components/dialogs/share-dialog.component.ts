@@ -76,9 +76,9 @@ export class ShareDialogComponent extends BaseMapComponent implements AfterViewI
     }
 
     public async ngAfterViewInit(): Promise<void> {
-        const dataToPreview = this.getDataFiltered();
-        const imageUrl = await this.shareUrlsService.getImagePreview(dataToPreview);
-        this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(imageUrl) as string;
+        //const dataToPreview = this.getDataFiltered();
+        //const imageUrl = await this.shareUrlsService.getImagePreview(dataToPreview);
+        //this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(imageUrl) as string;
     }
 
     public isApp(): boolean {
@@ -102,7 +102,7 @@ export class ShareDialogComponent extends BaseMapComponent implements AfterViewI
 
             this.lastShareUrl = shareUrl;
             this.shareUrlsService.setShareUrl(shareUrl);
-            this.imageUrl = this.shareUrlsService.getImageFromShareId(shareUrl);
+            //this.imageUrl = this.shareUrlsService.getImageFromShareId(shareUrl);
             const links = this.shareUrlsService.getShareSocialLinks(shareUrl);
             this.toastService.success(this.resources.dataUpdatedSuccessfully);
             this.shareAddress = links.ihm;

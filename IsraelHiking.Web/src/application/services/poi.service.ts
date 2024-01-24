@@ -142,6 +142,8 @@ export class PoiService {
     }
 
     public async initialize() {
+        return;
+        /*
         this.language$.pipe(skip(1)).subscribe(() => {
             this.poisCache = [];
             this.loggingService.info("[POIs] Language changed, updating pois");
@@ -179,10 +181,12 @@ export class PoiService {
                 this.handleUploadQueueChanges(this.offlineState.uploadPoiQueue);
             }
         });
-
+        */
     }
 
     private async handleUploadQueueChanges(items: Immutable<string[]>) {
+        throw new Error("Not implemented");
+        /*
         if (items.length === 0) {
             this.loggingService.info("[POIs] Upload queue changed and now it is empty");
             return;
@@ -242,9 +246,12 @@ export class PoiService {
                     this.store.dispatch(new RemoveFromPoiQueueAction(firstItemId));
             }
         }
+        */
     }
 
     private async getPoisFromServer(): Promise<GeoJSON.Feature<GeoJSON.Point>[]> {
+        throw new Error("Not implemented");
+        /*
         const visibleCategories = this.getVisibleCategories();
         if (this.mapService.map.getZoom() <= 10) {
             return [];
@@ -269,6 +276,7 @@ export class PoiService {
         } catch {
             return this.poisGeojson.features;
         }
+        */
     }
 
     private getPoisFromMemory(): GeoJSON.Feature<GeoJSON.Point>[] {
@@ -323,6 +331,8 @@ export class PoiService {
     }
 
     private async downlodOfflineFileAndUpdateDatabase(progressCallback: (value: number, text?: string) => void): Promise<void> {
+        throw new Error("Not implemented");
+        /*
         progressCallback(1, this.resources.downloadingPoisForOfflineUsage);
         const poiIdsToDelete = this.poisGeojson.features.map(f => this.getFeatureId(f));
         this.loggingService.info(`[POIs] Deleting exiting pois: ${poiIdsToDelete.length}`);
@@ -342,9 +352,12 @@ export class PoiService {
         this.loggingService.info(`[POIs] Finished downloading file and updating database, last modified: ${lastModified.toUTCString()}`);
         await this.fileService.deleteFileFromCache(Urls.poisOfflineFile);
         this.loggingService.info("[POIs] Finished deleting offline pois cached file");
+        */
     }
 
     private async updateOfflinePoisByPaging(lastModified: Date) {
+        throw new Error("Not implemented");
+        /*
         let modifiedUntil = lastModified;
         do {
             lastModified = modifiedUntil;
@@ -367,6 +380,7 @@ export class PoiService {
             this.loggingService.info(`[POIs] Updating last modified to: ${minDate}`);
             this.store.dispatch(new SetOfflinePoisLastModifiedDateAction(minDate));
         } while (modifiedUntil < new Date());
+        */
     }
 
     public async openPoisFile(blob: Blob, progressCallback: (percentage: number, text?: string) => void): Promise<Date> {
@@ -482,6 +496,8 @@ export class PoiService {
     }
 
     public async syncCategories(): Promise<void> {
+        return;
+        /*
         try {
             const layersState = this.store.selectSnapshot((s: ApplicationState) => s.layersState);
             for (const categoriesGroup of layersState.categoriesGroups) {
@@ -510,7 +526,7 @@ export class PoiService {
         } catch (ex) {
             this.loggingService.warning("[POIs] Unable to sync categories, using local categories");
         }
-
+        */
     }
 
     public getSelectableCategories(): ISelectableCategory[] {
@@ -536,6 +552,8 @@ export class PoiService {
     }
 
     public async getPoint(id: string, source: string, language?: string): Promise<GeoJSON.Feature> {
+        throw new Error("Not implemented");
+        /*
         const itemInCache = this.poisCache.find(f => this.getFeatureId(f) === id && f.properties.source === source);
         if (itemInCache) {
             return cloneDeep(itemInCache);
@@ -557,6 +575,7 @@ export class PoiService {
             this.poisCache.splice(0, 0, feature);
             return feature;
         }
+        */
     }
 
     public getLatLngFromId(id: string): LatLngAlt {
@@ -594,6 +613,8 @@ export class PoiService {
     }
 
     public getPoiSocialLinks(feature: GeoJSON.Feature): PoiSocialLinks {
+        throw new Error("Not implemented");
+        /*
         const language = this.resources.getCurrentLanguageCodeSimplified();
         const poiLink = this.hashService.getFullUrlFromPoiId({
             source: feature.properties.poiSource,
@@ -608,6 +629,7 @@ export class PoiService {
             whatsapp: this.whatsappService.getUrl(this.getTitle(feature, language), escaped) as string,
             waze: `${Urls.waze}${location.lat},${location.lng}`
         };
+        */
     }
 
     public mergeWithPoi(feature: GeoJSON.Feature, markerData: Immutable<MarkerData>) {
@@ -696,6 +718,8 @@ export class PoiService {
     }
 
     public async getClosestPoint(location: LatLngAlt, source?: string, language?: string): Promise<MarkerData> {
+        throw new Error("Not implemented");
+        /*
         let feature = null;
         try {
             const feature$ = this.httpClient.get(Urls.poiClosest, { params: {
@@ -711,6 +735,7 @@ export class PoiService {
             return null;
         }
         return this.geoJsonParser.toMarkerData(feature, this.resources.getCurrentLanguageCodeSimplified());
+        */
     }
 
     public addSimplePoint(latlng: LatLngAlt, pointType: SimplePointType): Promise<any> {

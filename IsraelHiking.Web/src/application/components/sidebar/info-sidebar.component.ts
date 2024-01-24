@@ -7,7 +7,7 @@ import { Select } from "@ngxs/store";
 import type { Immutable } from "immer";
 
 import { BaseMapComponent } from "../base-map.component";
-import { DownloadDialogComponent } from "../dialogs/download-dialog.component";
+//import { DownloadDialogComponent } from "../dialogs/download-dialog.component";
 import { ILegendItem } from "./legend-item.component";
 import { SidebarService } from "../../services/sidebar.service";
 import { ResourcesService } from "../../services/resources.service";
@@ -82,7 +82,8 @@ export class InfoSidebarComponent extends BaseMapComponent {
 
     public openDownloadDialog(event: Event) {
         event.preventDefault();
-        this.dialog.open(DownloadDialogComponent);
+        throw new Error("Not implemented");
+        //this.dialog.open(DownloadDialogComponent);
     }
 
     private initalizeLegendSections() {

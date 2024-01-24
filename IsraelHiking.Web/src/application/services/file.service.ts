@@ -138,9 +138,10 @@ export class FileService {
     }
 
     public async saveToFile(fileName: string, format: string, dataContainer: DataContainer) {
-        const responseData = format === "gpx"
-            ? await this.gpxDataContainerConverterService.toGpx(dataContainer)
-            : await firstValueFrom(this.httpClient.post(Urls.files + "?format=" + format, dataContainer)) as string;
+        if (format !== "gpx") {
+            throw new Error("Can't save to file using the server") //await firstValueFrom(this.httpClient.post(Urls.files + "?format=" + format, dataContainer)) as string;
+        }
+        const responseData = await this.gpxDataContainerConverterService.toGpx(dataContainer);
 
         if (!this.runningContextService.isCapacitor) {
             const blobToSave = await this.base64StringToBlob(responseData);
@@ -216,9 +217,12 @@ export class FileService {
             if (this.gpxDataContainerConverterService.canConvert(fileConent)) {
                 dataContainer = await this.gpxDataContainerConverterService.toDataContainer(fileConent);
             } else {
+                throw new Error("File type not supported");
+                /*
                 const formData = new FormData();
                 formData.append("file", file, file.name);
                 dataContainer = await firstValueFrom(this.httpClient.post(Urls.openFile, formData)) as DataContainer;
+                */
             }
         }
         if (dataContainer.routes.length === 0 ||
@@ -229,7 +233,8 @@ export class FileService {
     }
 
     public openFromUrl(url: string): Promise<DataContainer> {
-        return firstValueFrom(this.httpClient.get(Urls.files + "?url=" + url)) as Promise<DataContainer>;
+        throw new Error("Not implemented");
+        //return firstValueFrom(this.httpClient.get(Urls.files + "?url=" + url)) as Promise<DataContainer>;
     }
 
     public async addRoutesFromUrl(url: string) {

@@ -96,6 +96,8 @@ export class LayersService {
         if (baseLayerAddress.indexOf("{x}") !== -1) {
             return baseLayerAddress;
         }
+        throw new Error("Not implemented");
+        /*
         const defaultAddress = Urls.baseTilesAddress + "/Hebrew/Tiles/{z}/{x}/{y}.png";
         // using the same logic that the server is using in ImageCreationService + language
         if (!baseLayerAddress) {
@@ -110,12 +112,15 @@ export class LayersService {
             }
         }
         return `${Urls.baseTilesAddress}/${language}/${tiles}/{z}/{x}/{y}.png`;
+        */
     }
 
     private async syncUserLayers(): Promise<void> {
         if (!this.authorizationService.isLoggedIn()) {
             return;
         }
+        return;
+        /*
         try {
             const data = await firstValueFrom(this.httpClient.get(Urls.userLayers).pipe(timeout(10000))) as any as UserLayer[];
             if (data == null) {
@@ -167,6 +172,7 @@ export class LayersService {
         } catch (error) {
             this.loggingService.warning("[Layers] Unable to sync user layer from server - using local layers");
         }
+        */
     }
 
     public addBaseLayer(layerData: LayerData) {
@@ -197,6 +203,8 @@ export class LayersService {
         if (!this.authorizationService.isLoggedIn()) {
             return;
         }
+        return;
+        /*
         const layerToStore = { ...layer } as UserLayer;
         layerToStore.isOverlay = false;
         layerToStore.osmUserId = this.authorizationService.getUserInfo().id;
@@ -205,23 +213,30 @@ export class LayersService {
             ...layer,
             id: response.id
         }));
+        */
     }
 
     private async updateUserLayerInDatabase(isOverlay: boolean, layer: Immutable<EditableLayer>) {
         if (!this.authorizationService.isLoggedIn()) {
             return;
         }
+        return;
+        /*
         const layerToStore = { ...layer } as UserLayer;
         layerToStore.isOverlay = isOverlay;
         layerToStore.osmUserId = this.authorizationService.getUserInfo().id;
         layerToStore.id = layer.id;
         await firstValueFrom(this.httpClient.put(Urls.userLayers + layerToStore.id, layerToStore));
+        */
     }
 
     private async deleteUserLayerFromDatabase(id: string) {
+        throw new Error("Not implemented");
+        /*
         if (this.authorizationService.isLoggedIn()) {
             await firstValueFrom(this.httpClient.delete(Urls.userLayers + id));
         }
+        */
     }
 
     public addOverlay(layerData: LayerData): Overlay {
@@ -253,6 +268,8 @@ export class LayersService {
         if (!this.authorizationService.isLoggedIn()) {
             return;
         }
+        return;
+        /*
         const layerToStore = { ...layer } as UserLayer;
         layerToStore.isOverlay = true;
         layerToStore.osmUserId = this.authorizationService.getUserInfo().id;
@@ -261,6 +278,7 @@ export class LayersService {
             ...layer,
             id: response.id
         }));
+        */
     }
 
     public isNameAvailable(key: string, newName: string, isOverlay: boolean): boolean {

@@ -25,10 +25,10 @@ export class ConnectionService {
         private readonly loggingService: LoggingService) {
         this.stateChanged = new BehaviorSubject(true);
         this.isOnline = true;
-        window.addEventListener("online", () => this.updateInternetAccessAndEmitIfNeeded())
-        window.addEventListener("offline", () => this.updateInternetAccessAndEmitIfNeeded())
-        this.initializeDynamicTimer(ConnectionService.HEART_BREAK_INTERVAL);
-        this.updateInternetAccessAndEmitIfNeeded();
+        //window.addEventListener("online", () => this.updateInternetAccessAndEmitIfNeeded())
+        //window.addEventListener("offline", () => this.updateInternetAccessAndEmitIfNeeded())
+        //this.initializeDynamicTimer(ConnectionService.HEART_BREAK_INTERVAL);
+        //this.updateInternetAccessAndEmitIfNeeded();
     }
 
     private async getInternetStatusNow(): Promise<boolean> {
